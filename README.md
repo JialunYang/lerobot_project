@@ -9,7 +9,7 @@ The upstream `lerobot/` codebase is *not* tracked here.
 
 ## Getting Started
 ```bash
-# (example) create env
+# Vreate env
 conda create -n lerobot python=3.10 -y
 conda activate lerobot
 pip install -r scripts/requirements.txt
