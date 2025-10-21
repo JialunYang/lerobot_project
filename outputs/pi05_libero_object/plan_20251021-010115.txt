@@ -1,0 +1,78 @@
+```json
+{
+  "scene": {
+    "target": {
+      "name": "ketchup",
+      "best_view": 2,
+      "bbox_xyxy": [110, 180, 150, 230],
+      "confidence": 0.9
+    },
+    "distractors": [
+      {"name": "bottle", "view": 2, "bbox_xyxy": [160, 180, 200, 230]},
+      {"name": "box", "view": 2, "bbox_xyxy": [210, 180, 250, 230]}
+    ],
+    "notes": "Ketchup bottle identified in view 2 with high confidence."
+  },
+  "plan": [
+    {
+      "step": 1,
+      "action": "look",
+      "view": 2,
+      "pixel_waypoint": [130, 205],
+      "approach_vec_hint": [0, -1],
+      "gripper": {"mode": "open", "width_mm": 80},
+      "speed": "slow",
+      "constraints": ["avoid-bbox:bottle", "avoid-bbox:box"],
+      "success_criteria": "Target confirmed in view",
+      "fallback_if_fail": "abort"
+    },
+    {
+      "step": 2,
+      "action": "approach",
+      "view": 2,
+      "pixel_waypoint": [130, 205],
+      "approach_vec_hint": [0, -1],
+      "gripper": {"mode": "open", "width_mm": 80},
+      "speed": "med",
+      "constraints": ["avoid-bbox:bottle", "avoid-bbox:box"],
+      "success_criteria": "Close to target",
+      "fallback_if_fail": "abort"
+    },
+    {
+      "step": 3,
+      "action": "pregrasp",
+      "view": 1,
+      "pixel_waypoint": [130, 205],
+      "approach_vec_hint": [0, -1],
+      "gripper": {"mode": "open", "width_mm": 80},
+      "speed": "slow",
+      "constraints": ["keep-clear-left"],
+      "success_criteria": "Aligned with target",
+      "fallback_if_fail": "switch_to_view_2"
+    },
+    {
+      "step": 4,
+      "action": "grasp",
+      "view": 1,
+      "pixel_waypoint": [130, 205],
+      "approach_vec_hint": [0, -1],
+      "gripper": {"mode": "close", "width_mm": 50},
+      "speed": "slow",
+      "constraints": [],
+      "success_criteria": "Gripper closed on target",
+      "fallback_if_fail": "nudge"
+    },
+    {
+      "step": 5,
+      "action": "lift",
+      "view": 1,
+      "pixel_waypoint": [130, 205],
+      "approach_vec_hint": [0, -1],
+      "gripper": {"mode": "close", "width_mm": 50},
+      "speed": "med",
+      "constraints": [],
+      "success_criteria": "Target lifted",
+      "fallback_if_fail": "abort"
+    }
+  ],
+  "grasp
